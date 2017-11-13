@@ -12,7 +12,7 @@
   * [Date versioning](#date-versioning)
   * [Hash versioning](#hash-versioning)
   * [UUID versioning](#uuid-versioning)
-  * [UUID versioning](#tuple-versioning)
+  * [Tuple versioning](#tuple-versioning)
 * [Builds](#builds)
   * [Version pinning](#version-pinning)
   * [Dependency resolution](dependency-resolution)
@@ -38,40 +38,34 @@ See also:
 
 ### Version identifier
 
-A version identifier, a.k.a. version number, is a way to help people understand 
+A version identifier, a.k.a. version number, is a way to help people understand these kinds of questions:
+
+  * Is this version better/newer than this other version?
+
+  * Will upgrading to this new versino break anything?
+
+  * Do I need to upgrade this to be secure?
 
 A version identifier is typically a complex data type made up of iterable data types. A version identifier isn't typically a simple string, nor a simple number.
 
-Some version identifier conventions use three numbers, to indicate major version, minor version, and patch version:
+Some version identifier conventions use numbers:
 
-  * Such as "1.2.3" to indicate major version 1, minor version 2, patch version 3.
+  * Such as "1.2.3" to indicate major version 1, minor version 2, micro version 3.
 
-Some version identifier conventions use a date, to indicate the publication date:
+Some version identifier conventions use a date:
 
   * Such as "2016-12-31" to indicate the publication date of 2016, December 31st.
 
-Some version identifier conventions use words too, such as "alpha", "beta", "pre", "rc0", "rc1", etc.
+Some version identifier conventions use text:
 
-  * Such as "1.0.0-alpha" to indicate an alpha test release.
+  * Such as "alpha" to indicate an alpha test release, "pre" to indicate a pre-release, "rc" to indicate a release candidate.
 
   * These strings may mean different things in different libraries, based on their release processes.
 
   * These strings may not mean exactly the same thing in different software packages, yet there are widely accepted conventions, such as "rc" meaning a release candidate, and "rc0" meaning the first release candidate. 
 
-  * The string conveys meaning, and if the user wants, they can look up that software package, and find out exactly what "rc0" means, gaining even more meaning from the description. 
+  * Even a custom enumeration that holds values such as “alpha”, “beta”, "pre", “rc”, isnt just a string, but an enumerated type, meant to convey meaning. The fact that they are serialised into a format that happens to be readable and parsable, is besides the point. 
 
-  * Even a custom enumeration that holds values such as “alpha”, “beta”, "pre", “rc”, isnt just a string, but an enumerated type, meant to convey meaning. 
-
-  * The fact that they are serialised into a format that happens to be readable and parsable, is besides the point. 
-
-Version identifiers can be helpful with these three questions:
-
-  * Is this version greater than this other version? This implies better.
-
-  * Will upgrading to this new versino break anything? This is extremely hard to answer/
-
-  * Do I have to upgrade this to remain secure? This may also break everything.
-  
 
 ### Bug
 
@@ -112,9 +106,9 @@ Semantic versioning is a simple set of rules and requirements that dictate how v
 
 Given a version number MAJOR.MINOR.PATCH, increment the:
 
-  * MAJOR version when you make incompatible API changes,
+  * MAJOR version when you make incompatible API changes, i.e. breaking changes.
 
-  * MINOR version when you add functionality in a backwards-compatible manner, and
+  * MINOR version when you add functionality in a backwards-compatible manner, i.e. non-breaking changes.
 
   * PATCH version when you make backwards-compatible bug fixes.
 
@@ -384,21 +378,11 @@ A. Yes this could help.
 
 ### Semantic versioning
 
-* Semantic versioning is a way for package maintainers to signal their expectations. It's not something you can rely completely on - in these systems I'm describing, you still need automated tests to give you more confidence that upgrading is safe. But semantic versioning improves your confidence which helps avoid wasting work on an upgrade that will certainly fail, and helps identify problems in advance.
+* Semantic versioning is a way for package maintainers to signal their expectations.
 
-* I write a bunch of Rust. The Cargo package manager has several layers of "defense":
+  * It's not something you can rely completely on - in these systems I'm describing, you still need automated tests to give you more confidence that upgrading is safe. 
 
-  * 1. The "Cargo.lock" contains exact versions of all transitive dependencies. (And Cargo doesn't allow overwriting a version once published, and lock files even override normal package "yanks", so these version numbers are very stable identifiers.)
-
-  * 2. The "Cargo.toml" file contains manually-specified semver information. I can run "cargo update" to get the latest, semver-compatible versions of all my dependencies.
-
-  * 3. In the rare case that somebody messes up semver, I can just blacklist certain versions in "Cargo.toml", or add more specific constraints. I think I've done this maybe two or three times in thousands of dependency updates.
-
-  * 4. My own projects have unit tests, and of course, Rust does extensive compile-time checks. So I'm likely to catch any breakage anyway.
-
-  * So the absolute worse-case scenario here is that somebody messes up (which is very rare). At this point, I can just file a bug upstream, lock a specific version down in "Cargo.toml", and wait for things to get sorted out.
-
-  * I have zero need to "be certain". I'm quite happy with "It works nicely 99.9% of time, and it has an easy manual fallback when the inevitable problems occur."
+  * But semantic versioning improves your confidence which helps avoid wasting work on an upgrade that will certainly fail, and helps identify problems in advance.
 
 * I do not understand the popularity of semantic versioning. Why would I trust hundreds of people that their non-breaking changes are really non-breaking to me? And suddenly, the auto-scaling fails in production because something has updated to include a new bug.
 
@@ -434,6 +418,20 @@ A. Yes this could help.
 * Semver tries to solve very real problems, and any alternative approach would need to explain how it would solve these real problems. 
 
 * Semver is a social protocol, not a technical one; in other words, it's wishy-washy meatspace stuff (and yet it's still the best we've got at the moment). As consequence of being wishy-washy meatspace stuff, it lets any library that uses semver define "breaking change" in any way it wants to. This is literally the first rule of the semver specification (where, for the entirety of the document, the "public API" is how breakage is defined)/
+
+* I write a bunch of Rust. The Cargo package manager has several layers of "defense":
+
+  * 1. The "Cargo.lock" contains exact versions of all transitive dependencies. (And Cargo doesn't allow overwriting a version once published, and lock files even override normal package "yanks", so these version numbers are very stable identifiers.)
+
+  * 2. The "Cargo.toml" file contains manually-specified semver information. I can run "cargo update" to get the latest, semver-compatible versions of all my dependencies.
+
+  * 3. In the rare case that somebody messes up semver, I can just blacklist certain versions in "Cargo.toml", or add more specific constraints. I think I've done this maybe two or three times in thousands of dependency updates.
+
+  * 4. My own projects have unit tests, and of course, Rust does extensive compile-time checks. So I'm likely to catch any breakage anyway.
+
+  * So the absolute worse-case scenario here is that somebody messes up (which is very rare). At this point, I can just file a bug upstream, lock a specific version down in "Cargo.toml", and wait for things to get sorted out.
+
+  * I have zero need to "be certain". I'm quite happy with "It works nicely 99.9% of time, and it has an easy manual fallback when the inevitable problems occur."
 
 Cons:
 
@@ -495,11 +493,16 @@ Cons:
 
   * Worst of all, suppose any of your dependencies gets compromised and now has a security vulnerability. What do you do?
 
-  * This is not a nitpick; I think it's central. Because I need network-free, reproducible builds of known-good code, I need to maintain a copy of third-party code somewhere. When I start doing that, I need to keep track of what version (which could be a commit, sure) I'm storing to know when I'm out of date. Then, when my cached copy is out of date, I need to know how safe it is to update to match the remote version: should I expect builds to break, or not?
+* Because I need network-free, reproducible builds of known-good code, I need to maintain a copy of third-party code somewhere. 
 
-  * Semantic versioning is a way for package maintainers to signal their expectations. It's not something you can rely completely on - in these systems I'm describing, you still need automated tests to give you more confidence that upgrading is safe. But semantic versioning improves your confidence which helps avoid wasting work on an upgrade that will certainly fail, and helps identify problems in advance.
+  * When I start doing that, I need to keep track of what version (which could be a commit, sure) I'm storing to know when I'm out of date. 
 
-  * It's also helpful to have minor and patch versions so applications can concisely describe which features of third-party dependencies are required to build and run your code. This makes it easier to integrate new applications - you can clearly see whether your cached copy of the third-party code is up-to-date enough.
+  * Then, when my cached copy is out of date, I need to know how safe it is to update to match the remote version: should I expect builds to break, or not?
+
+* It's also helpful to have minor and patch versions so applications can concisely describe which features of third-party dependencies are required to build and run your code. This makes it easier to integrate new applications - you can clearly see whether your cached copy of the third-party code is up-to-date enough.
+
+
+### Pinning and technical debt
 
 * The trouble with version pinning is that, over time, technical debt builds up. 
 
@@ -825,8 +828,6 @@ reply
 
 * I'm not totally sold on the heavy BDSM type systems, but one of their clear advantages comes from trivially handling this problem. Elm's package manager simply won't let you publish an incompatible update without bumping the version, all handled by type check.
 
-* Why is parsing "1.23.4" more difficult than "(1, 23, 4)"? :)
-
 * People using semantic versioning when its totally unnecessary is a peeve of mine. Maybe if youre releasing an api or something it makes sense (I dunno, I dont do that) I make games and just number my releases / versions 1,2,3,4,5,6 etc.
 
   * You can also do this with semantic versioning; I have indeed seen people who, when forced to use semver, just do 1.0.0, 2.0.0, 3.0.0, 4.0.0... It's completely valid, because you, as the package author, are given ultimate freedom by semver in determining when major version bumps are appropriate.
@@ -849,7 +850,7 @@ reply
 
   * There is also one final fear with the way Rust setup its crates ecosystem - if you are bold and break things but don't end up delaying 1.0 for way too long, you might end up incrementing the major version a bit. And there is a cultural and subconscious aversion to anything on crates.io you see at version 3.0 or heavens forbid 4.0 or more. That software is unreliable, the developer is changing it all the time!. But then you go and use a 0.15 crate that is having the same problem anyway, just without saying "this probably does its job" like a 1.0 can.
 
-  & In the end, versioning truly is almost meaningless, even in an enforced semantic versioning system the intent breaks down and meaning is lost just because different people release software differently. But that is a real deep almost - because its still more information than not having it, and in Rust right now at least it gives more helpful information than not. I'd call it a success at that point - way more than say Linux, where the major version is incremented whenever Linus wants to run a Google+ poll...
+  * In the end, versioning truly is almost meaningless, even in an enforced semantic versioning system the intent breaks down and meaning is lost just because different people release software differently. But that is a real deep almost - because its still more information than not having it, and in Rust right now at least it gives more helpful information than not. I'd call it a success at that point - way more than say Linux, where the major version is incremented whenever Linus wants to run a Google+ poll...
 
 * As far as I understand, the situation with 0.x.y libs on crates.io is working-as-intended; a major version of 0 denotes libraries that the author does not yet want to commit to having a stable interface (and may not ever want to commit to such), which is crucial information for any potential users of that library. 
 
