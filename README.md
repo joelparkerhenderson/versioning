@@ -13,7 +13,7 @@
   * [Hash versioning](#hash-versioning)
   * [UUID versioning](#uuid-versioning)
   * [Tuple versioning](#tuple-versioning)
-* [Builds](#builds)
+* [Deterministic builds](#deterministic-builds)
   * [Version pinning](#version-pinning)
   * [Dependency resolution](dependency-resolution)
   * [Vendoring](vendoring)
@@ -241,7 +241,7 @@ Questions:
   * Or does the tuple have some structure that is different from the containment found in semver? 
 
 
-## Builds
+## Deterministic builds
 
 
 ### Version pinning
