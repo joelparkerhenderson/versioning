@@ -30,7 +30,8 @@ Credit:
 
 See also:
 
-  * http://stevelosh.com/blog/2012/04/volatile-software
+  * ["The cargo cult of versioning" by Kartik Agaram](http://akkartik.name/post/versioning)
+  * ["Volatile Software" by Steve Losh](http://stevelosh.com/blog/2012/04/volatile-software)
 
 
 ## Terminology
@@ -38,7 +39,7 @@ See also:
 
 ### Version identifier
 
-A version identifier, a.k.a. version number, is a way to help people understand these kinds of questions:
+A version identifieris a way to help people understand these kinds of questions:
 
   * Is this version better/newer than this other version?
 
@@ -65,6 +66,8 @@ Some version identifier conventions use text:
   * These strings may not mean exactly the same thing in different software packages, yet there are widely accepted conventions, such as "rc" meaning a release candidate, and "rc0" meaning the first release candidate. 
 
   * Even a custom enumeration that holds values such as “alpha”, “beta”, "pre", “rc”, isnt just a string, but an enumerated type, meant to convey meaning. The fact that they are serialised into a format that happens to be readable and parsable, is besides the point. 
+
+A version identifier is also known as a version number, even though it's not really a number.
 
 
 ### Bug
