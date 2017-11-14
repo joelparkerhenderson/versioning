@@ -44,11 +44,13 @@ Versioning software can be challenging. There's terminology to learn and many tr
 
 If you're new to versionong, we recommend these steps to start:
 
-1. Use semantic versioning
+1. Use semantic versioning.
 
-2. Use deterministic builds, including pinning, resolution, and vendoring.
+2. Use deterministic builds, including pinning, resolutions, lockfiles,  and vendoring.
 
-3. Use automatic testing to verify your dependencies and their ugrades.
+3. Add the dependency resolution files, e.g. the lockfiles, to your version control.
+
+4. Use automatic testing to verify your dependencies and their ugrades.
 
 
 ## Terminology
