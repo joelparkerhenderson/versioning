@@ -46,7 +46,7 @@ Versioning software can be challenging. There's terminology to learn and many tr
 
 ### Do this first
 
-If you're new to versionong, or just want to know what to do first, we recommend these steps:
+If you're new to versioning, or just want to know what to do first, we recommend these steps:
 
 1. Use semantic versioning.
 
