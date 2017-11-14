@@ -3,15 +3,16 @@
 This page has versioning notes about version numbers, deterministic builds, pinning, vendoring, and discussion from peers. Suggestions are welcome.
 
 * [Introduction](#introduction)
-* [Terminology](#teminology)
-  * [Version identifier](#version-identifier)
-  * [Bug](#bug)
-  * [Bug fix](#bug-fix)
+  * [Do this first](#do-this-first)
+  * [What is a version identifier?](#what-is-a-version-identifier)
+* [Types of version changes]
+  * [Bug fix](#bug-fix-change)
   * [Non-breaking change](#non-breaking-change)
   * [Breaking change](#breaking-change)
 * [Types of versioning](#types-of-versioning)
   * [Semantic versioning](#semantic-versioning)
   * [Increment versioning](#date-versioning)
+  * [Keyword versioning](#uuid-versioning)
   * [Date versioning](#date-versioning)
   * [Hash versioning](#hash-versioning)
   * [UUID versioning](#uuid-versioning)
@@ -42,7 +43,10 @@ See also:
 
 Versioning software can be challenging. There's terminology to learn and many tradeoffs.
 
-If you're new to versionong, we recommend these steps to start:
+
+### Do this first
+
+If you're new to versionong, or just want to know what to do first, we recommend these steps:
 
 1. Use semantic versioning.
 
@@ -53,12 +57,9 @@ If you're new to versionong, we recommend these steps to start:
 4. Use automatic testing to verify your dependencies and their ugrades.
 
 
-## Terminology
+### What is a version identifier?
 
-
-### Version identifier
-
-A version identifieris a way to help people understand these kinds of questions:
+A version identifier is a way to help people understand these kinds of questions:
 
   * Is this version better/newer than this other version?
 
@@ -66,39 +67,37 @@ A version identifieris a way to help people understand these kinds of questions:
 
   * Do I need to upgrade this to be secure?
 
-A version identifier is typically a complex data type made up of iterable data types. A version identifier isn't typically a simple string, nor a simple number.
+A version identifier is typically a complex data type made up of iterable data types. 
 
-Some version identifier conventions use numbers:
+  * A version identifier isn't typically a simple string, nor a simple number.
 
-  * Such as "1.2.3" to indicate major version 1, minor version 2, micro version 3.
+  * A version identifier is also known as a version number, even though it's not really a number.
 
-Some version identifier conventions use a date:
+Examples:
 
-  * Such as "2016-12-31" to indicate the publication date of 2016, December 31st.
+  * A string of numbers and dots, such as "1.2.3", to indicate major version 1, minor version 2, micro version 3.
 
-Some version identifier conventions use text:
+  * An incrementing number, such as "123", to indicate the 123rd release or build.
 
-  * Such as "alpha" to indicate an alpha test release, "pre" to indicate a pre-release, "rc" to indicate a release candidate.
+  * A keyword, such as "alpha" to indicate an alpha-testing release.
 
-  * These strings may mean different things in different libraries, based on their release processes.
+  * A date, such as "2016-12-31" to indicate the publication date of 2016, December 31st.
 
-  * These strings may not mean exactly the same thing in different software packages, yet there are widely accepted conventions, such as "rc" meaning a release candidate, and "rc0" meaning the first release candidate. 
-
-  * Even a custom enumeration that holds values such as “alpha”, “beta”, "pre", “rc”, isnt just a string, but an enumerated type, meant to convey meaning. The fact that they are serialised into a format that happens to be readable and parsable, is besides the point. 
-
-A version identifier is also known as a version number, even though it's not really a number.
+  * A hash, such as "a7ac99da44892ef15fe15d7ad2d22d292d9d2a85" to indicate a git commit.
 
 
-### Bug
+## Types of version changes
+
+
+### Bug fix change
 
 A bug is any deviation in actual behaviour from what the documentation says.
 
-  * If a program isn't documented, then its code implicitly fills the role of documentation. This does mean that a bug fix may be considered a breaking change.
-
-
-### Bug fix
+  * If a program isn't documented, then its code implicitly fills the role of documentation. 
 
 A bug fix is a program change that brings the actual behavior into line with the expected behavior. 
+
+  * If a prgram isn't documented, and the bug isn't about some kind of externally documented area, then a bug fix might be considered a breaking change by some people.
 
 
 ### Non-breaking change
@@ -166,6 +165,27 @@ Pros:
 Cons:
 
   * Does not indicate a purpose of a version upgrade, such as a fix, or new feature, or breaking change.
+
+  * Even a custom enumeration that holds values such as “alpha”, “beta”, "pre", “rc”, isnt just a string, but an enumerated type, meant to convey meaning. The fact that they are serialised into a format that happens to be readable and parsable, is besides the point. 
+
+
+### Keyword verisioning
+
+Keyword versioning is a general idea to use special words in the version string.
+
+  * Such as "alpha" to indicate an alpha test release, "pre" to indicate a pre-release, "rc" to indicate a release candidate.
+
+Pros:
+
+  * Easy to skim.
+
+  * Conveys more meaning than just a number.
+
+Cons:
+
+  * These strings may mean different things in different libraries, based on their release processes.
+
+  * These strings may not mean exactly the same thing in different software packages, yet there are widely accepted conventions, such as "rc" meaning a release candidate, and "rc0" meaning the first release candidate. 
 
 
 ### Date versioning
