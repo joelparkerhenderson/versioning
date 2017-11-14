@@ -5,7 +5,7 @@ This page has versioning notes about version numbers, deterministic builds, pinn
 * [Introduction](#introduction)
   * [Do this first](#do-this-first)
   * [What is a version identifier?](#what-is-a-version-identifier)
-* [Types of version changes]
+* [Types of version changes](#types-of-version-changes)
   * [Bug fix](#bug-fix-change)
   * [Non-breaking change](#non-breaking-change)
   * [Breaking change](#breaking-change)
