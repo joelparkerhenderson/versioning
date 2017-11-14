@@ -1,5 +1,8 @@
 # Versioning
 
+This page has versioning notes about version numbers, deterministic builds, pinning, vendoring, and discussion from peers. Suggestions are welcome.
+
+* [Introduction](#introduction)
 * [Terminology](#teminology)
   * [Version identifier](#version-identifier)
   * [Bug](#bug)
@@ -32,6 +35,18 @@ See also:
 
   * ["The cargo cult of versioning" by Kartik Agaram](http://akkartik.name/post/versioning)
   * ["Volatile Software" by Steve Losh](http://stevelosh.com/blog/2012/04/volatile-software)
+
+## Introduction
+
+Versioning software can be challenging. There's terminology to learn and many tradeoffs.
+
+If you're new to versionong, we recommend these steps to start:
+
+1. Use semantic versioning
+
+2. Use deterministic builds, including pinning, resolution, and vendoring.
+
+3. Use automatic testing to verify your dependencies and their ugrades.
 
 
 ## Terminology
