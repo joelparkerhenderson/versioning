@@ -35,6 +35,8 @@ See also:
 
   * ["The cargo cult of versioning" by Kartik Agaram](http://akkartik.name/post/versioning)
   * ["Volatile Software" by Steve Losh](http://stevelosh.com/blog/2012/04/volatile-software)
+  * ["Dear package manager, dependency resolution results should be in version control" by havoc](https://blog.ometer.com/2017/01/10/dear-package-managers-dependency-resolution-results-should-be-in-version-control/)
+
 
 ## Introduction
 
