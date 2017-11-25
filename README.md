@@ -22,7 +22,7 @@ This page has versioning notes about version numbers, deterministic builds, pinn
   * [Dependency resolution](dependency-resolution)
   * [Vendoring](vendoring)
 * [Controversies](#controversies)
-  * [Semantic vesioning doesn't work](#semantic-vesioning-doesnt-work)
+  * [Semantic versioning doesn't work](#semantic-versioning-doesnt-work)
   * [A package manager should provide no options for version pinning](a-package-manager-should-provide-no-options-for-version-pinning)
   * [Package reputation](package-reputation)
   * [Automated regression testing](#automated-regression-testing)
@@ -63,7 +63,7 @@ A version identifier is a way to help people understand these kinds of questions
 
   * Is this version better/newer than this other version?
 
-  * Will upgrading to this new versino break anything?
+  * Will upgrading to this new version break anything?
 
   * Do I need to upgrade this to be secure?
 
@@ -169,7 +169,7 @@ Cons:
   * Even a custom enumeration that holds values such as “alpha”, “beta”, "pre", “rc”, isnt just a string, but an enumerated type, meant to convey meaning. The fact that they are serialised into a format that happens to be readable and parsable, is besides the point. 
 
 
-### Keyword verisioning
+### Keyword versioning
 
 Keyword versioning is a general idea to use special words in the version string.
 
@@ -353,7 +353,7 @@ Example using git submodules:
 ## Controversies
 
 
-### Semantic vesioning doesn't work
+### Semantic versioning doesn't work
 
 Why "semantic versioning" doesn't really work:
 
@@ -484,12 +484,12 @@ Cons:
   * Incidentally, this is also why evolving the web platform is so hard. Among the uncountable sites on the internet, even if the current behavior seems totally broken, someone is shipping code that relies on it.
 
 
-### Increment vesioning
+### Increment versioning
 
 * No comments yet.
 
 
-### Date vesioning
+### Date versioning
 
 * No comments yet.
 
