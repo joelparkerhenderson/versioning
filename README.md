@@ -1,3 +1,12 @@
+<!--
+  * browser: versioning
+  * tracker: f44c30d1b876f8987cf78c727e573542
+  * version: 1.1.0
+  * updated: 2018-02-24T03:07:25Z
+  * contact: Joel Parker Henderson (http://joelparkerhenderson.com)
+  * options: commentable
+-->
+
 # Versioning
 
 This page has versioning notes about version numbers, deterministic builds, pinning, vendoring, and discussion from peers. Suggestions are welcome.
