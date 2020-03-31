@@ -39,7 +39,7 @@ This page has versioning notes about version numbers, deterministic builds, pinn
 
 Credit:
 
-  * https://news.ycombinator.com/item?id=15676691
+  * [ycombinator - The cargo cult of versioning (akkartik.name)](https://news.ycombinator.com/item?id=15676691)
 
 See also:
 
@@ -144,7 +144,7 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
 
   * Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
 
-See http://semver.org/
+See [semver.org](http://semver.org/)
 
 Pros:
 
@@ -443,8 +443,7 @@ A. Yes this could help.
 
 * Semver-based package managers are most modern ones (e.g. npm, bundler, cargo) that have the concept of Semver embedded in the version constraints for dependencies.
 
-  * E.g. the tilde (~) and caret (^) operators in npm[0] allow you to specify version constraints on dependencies, that allow them to be resolved/pinned to higher minor/patch versions of that package, but not to a higher major version since that will by the Semver definition contain breaking changes and those might impact your project.
-[0]: https://docs.npmjs.com/misc/semver#tilde-ranges-123-12-1
+  * E.g. the tilde (~) and caret (^) operators in [npm](https://docs.npmjs.com/misc/semver#tilde-ranges-123-12-1) allow you to specify version constraints on dependencies, that allow them to be resolved/pinned to higher minor/patch versions of that package, but not to a higher major version since that will by the Semver definition contain breaking changes and those might impact your project.
 
 * There are tools like greenkeeper which use your project's unit test to try out packages before upgrading, adding extra level of assurance.
 
@@ -578,7 +577,7 @@ Cons:
 
 * I agree that the best approach today is to maintain a local cache of a specific version, and to maintain unit tests to warn you of any breakage. In which case: what's the point of a package manager, again?
 
-* My current approach is to be extremely conservative in introducing dependencies, inline any dependencies I do introduce, and then treat them as my own code, polishing them alongside my own stuff, deleting code paths I don't need, submitting patches upstream when I discover issues from my hacking. I'm investigating better ways to write automated tests, so that when tests pass we can actually gain confidence that nothing has regressed: http://akkartik.name/about.
+* My current approach is to be extremely conservative in introducing dependencies, inline any dependencies I do introduce, and then treat them as my own code, polishing them alongside my own stuff, deleting code paths I don't need, submitting patches upstream when I discover issues from my hacking. I'm investigating better ways to write automated tests, so that when tests pass we can actually gain confidence that nothing has regressed: [akkartik.name](http://akkartik.name/about).
 
 * There are plenty of strategies for making your dependencies deterministic. At Airbnb, we use caching proxies in front of all third-party language package managers, so the first time someone in the org pulls “foo 1.2.3”, the source tarball is frozen forever. The package can’t be yanked upstream, force-pushed over, etc. This is a kind of vendoring.
 
@@ -589,15 +588,15 @@ Cons:
 
 * The fact that we pin versions in places like Gemfile.lock is totally fine. However, the fact that we pin versions in places like Gemfile is a smell. 
 
-  * This discussion gets at the distinction: https://stackoverflow.com/questions/4151495/should-gemfile-l...
+  * This discussion gets at the distinction: [Should Gemfile.lock be included in .gitignore?](https://stackoverflow.com/questions/4151495/should-gemfile-lock-be-included-in-gitignore)
 
   * The use of left-pad as an example in OP was intended as an acknowledgement of the deployment issues you point out.
 
-  * See my example of "exemplary library use" at http://arclanguage.org/item?id=20221
+  * See my example of "exemplary library use" at [arclanguage.org/](http://arclanguage.org/item?id=20221)
 	
 * Putting version numbers in Gemfile.lock does not accurately reflect the workflow where all upgrades happen with humans in the loop, who need to be aware of and initiate any change that happens in your dependencies' code.
 
-* Version locking every dependency is identical to just inlining every dependency in the repo. And I actually like this approach a lot. See my example of "exemplary library use" at http://arclanguage.org/item?id=20221. 
+* Version locking every dependency is identical to just inlining every dependency in the repo. And I actually like this approach a lot. See my example of "exemplary library use" at [arclanguage.org/](http://arclanguage.org/item?id=20221). 
 
 * I don't love lockfiles, but you need some way deterministic dependency resolution.
 
@@ -609,8 +608,7 @@ Cons:
 
 ### Using latest
 	
-* I work primarily in the enterprise Java world and I'd never just blindly compile in a dependency of LATEST and keep my fingers crossed. Any version bumps in my POM dependencies block are intentional. The transitive dependencies are hard enough to deal with already without having to worry if my dependent binary footprint changed significantly from the last build.
-reply
+* I work primarily in the enterprise Java world and I'd never just blindly compile in a dependency of LATEST and keep my fingers crossed. Any version bumps in my POM dependencies block are intentional. The transitive dependencies are hard enough to deal with already without having to worry if my dependent binary footprint changed significantly from the last build
 	
 
 ### You can't trust semantic versioning
@@ -648,7 +646,7 @@ reply
 
   * Either way, that sort of automatic “exports” verification could be a base layer in a semver verification package manager, with integration tests layered on top.
 
-* For C ABI, this exists since quite some time: https://abi-laboratory.pro/tracker/timeline/libevent/ (though, there is not really a way to enforce).
+* For C ABI, this exists since quite some time: [API/ABI changes review for libevent](https://abi-laboratory.pro/tracker/timeline/libevent/) (though, there is not really a way to enforce).
 
 * There's complexity in practice. For example, in a language with function overloading and implicit conversions, adding an overload may silently change the meaning of existing code.
 Sometimes, this can get very gnarly. In more complicated scenarios (e.g. involving inheritance), it is even possible to have code that silently changes its meaning in such circumstances, e.g. when overloading methods across several classes in a hierarchy. It'd be rather convoluted code, but not out of the realm of possibility.
@@ -673,13 +671,12 @@ It completely breaks upgrades. Newer versions aren't compatible with older versi
 * Semver is a wetware protocol, not a formal, mathematically certain concept. You also can never be certain that the car is not going to run through pedestrian crossing on red light when you step in - but it doesn't mean that traffic lights are useless. Semver is like traffic lights. For reproducible builds/increased certainty harden it with some kind of pinning or local copy.
 
 * Elm enforces semantic versioning with its type system, and one can also print the diff of values/functions between separate package versions. In principle, this is doable.
-reply
 	
 * API compatibility (showing that a package contains the same functions, which accept the same kinds of inputs and produce the same kinds of outputs) is only part of the problem-- it's harder to show that the functions actually do the same thing, but that's arguably more important than API compatibility. Typically, a compiler will catch a breaking API change; a behavior change will cause problems at runtime if a function suddenly starts doing something completely different.
 
 * "It's harder to show that the functions actually do the same thing". Effectively impossible, with a Turing complete programming environment. (“Effectively,” because technically our physical computers have a bounded number of states and inputs, thus aren’t technically Turing complete, thus Rice’s theorem technically doesn’t apply.)
 
-* There are tools like QuickCheck (https://hackage.haskell.org/package/QuickCheck) that can bombard the function with large amounts of random (but legal) input data and makes sure it's behaving.
+* There are tools like [QuickCheck](https://hackage.haskell.org/package/QuickCheck) that can bombard the function with large amounts of random (but legal) input data and makes sure it's behaving.
 
 * I've always felt versioning is more or less a form of marketing for your software. It's handy that people are kind of using convention to say things like "this is a HUGE change" vs "oops, bugfix". But it's really just conventions of communication, which, in a nutshell, comes with zero guarantee .
 
@@ -763,7 +760,7 @@ reply
 
 * Version pinning isn't mutually exclusive to running latest, head, or whatever you call now. You can still resolve now to some version. For example, Debian stable resolves to version 9. Stable points to the dependency tree called version 9, but you can also just reference it directly if you want. You can go back in time and reference dependency tree 8 if 9 was a doozy.
 
-* Linux distributions have been including the major version in the name for a long time; when we started doing this at Red Hat I wrote down the rationale at http://ometer.com/parallel.html in order to convince upstream projects to do this upstream, as many now do. For non-system package managers like npm, always using a lockfile is the best current option IMO, for those package managers that support it. https://blog.ometer.com/2017/01/10/dear-package-managers-dep...
+* Linux distributions have been including the major version in the name for a long time; when we started doing this at Red Hat I wrote down the rationale at [ometer.com](http://ometer.com/parallel.html) in order to convince upstream projects to do this upstream, as many now do. For non-system package managers like npm, always using a lockfile is the best current option IMO, for those package managers that support it. [Dear package managers: dependency resolution results should be in version control](https://blog.ometer.com/2017/01/10/dear-package-managers-dependency-resolution-results-should-be-in-version-control/)
 	
 * Windows 8 went straight to Windows 10, without any Windows 9. 
 
@@ -784,7 +781,6 @@ reply
   * The complaint seems to be that the update command is not sufficiently safe by default (though the `--conservative`, `--minor` and `--strict` flags help there), which is fair enough, but why not just fix the default behavior?
 
 * Doing `npm update` will only update to the latest version that matches the selector in your `package.json`. So if you ran `npm install --save` and it wrote 'foo@^1.2.3', `npm update` will not update to release 2.0.0 which includes breaking changes, but will update to 1.2.5 which includes fixes. The ^ symbol is the default which will allow new features and fixes, but not breaking changes. You can optionally set '~' on a conditional basis or npm-wide default for fixes only, or pin packages only if that's your fancy. But the default seems pretty sensible in my opinion.
-reply
 	
   * The behaviour of package-lock.json was changed in npm 5.1.0 by means of pull request #16866. The behaviour that you observe is apparently intended by npm as of version 5.1.0.
 
@@ -810,11 +806,11 @@ reply
 	
 * Basically the perl/CPAN model is: Don’t break backwards compatibility unless you absolutely have to; as in cases of security or when the original functionality never worked in the first place.
 
-  * See https://perldoc.perl.org/perlpolicy.html#BACKWARD-COMPATIBIL... that’s the policy for the language itself, but as it mentions there it’s considered generally a “community” virtue. I wasn’t programming back in 02 so I’m sure it was extremely different (and the source I’ve read from modules from that era is pretty frightening. Any major framework or generally used module will try to maintain backwards compatibility at least as far as documented behavior. I’ve never come across the kind of stuff I see all the time with node and go and python; package maintainers changing parameters and such because they weren’t happy with the original API.
+  * See [BACKWARD COMPATIBILITY AND DEPRECATION](https://perldoc.perl.org/perlpolicy.html#BACKWARD-COMPATIBILITY-AND-DEPRECATION) that’s the policy for the language itself, but as it mentions there it’s considered generally a “community” virtue. I wasn’t programming back in 02 so I’m sure it was extremely different (and the source I’ve read from modules from that era is pretty frightening. Any major framework or generally used module will try to maintain backwards compatibility at least as far as documented behavior. I’ve never come across the kind of stuff I see all the time with node and go and python; package maintainers changing parameters and such because they weren’t happy with the original API.
 
 * Version numbers are what you expose to the real world, something which semantic versioning tries to standardize. I shouldn't have to care if you use git, hg or copy-paste-versioning internally.
 
-* I feel like this works reasonably well uusing Java: https://github.com/nebula-plugins/gradle-dependency-lock-plu...
+* I feel like this works reasonably well using Java: [Gradle Dependency Lock Plugin](https://github.com/nebula-plugins/gradle-dependency-lock-plugin)
 
   * You specify what version constraint you want for each dependency (latest.release, major.+, major.minor.+, a specific version number...).
 
@@ -824,7 +820,7 @@ reply
 
 * The main reason for trying to jam everything into three numbers of "semver" is that otherwise you get total freeform chaos. 
 
-  * Look at Debian/Ubuntu, where you get things like "30~pre9-5ubuntu2" and "5.1.1alpha+20110809-3" and "1.5.0-1~webupd8~precise".
+  * Look at Debian/Ubuntu, where you get things like "30\~pre9-5ubuntu2" and "5.1.1alpha+20110809-3" and "1.5.0-1\~webupd8\~precise".
 
 * When a major change is made to something, as in a breaking change, where you as the developer are making the conscious decision that you will cause other people's shit to break if they keep pulling "latest" I absolutely think that the major version number should just be part of the naming scheme, not the versioning scheme.
 
@@ -860,12 +856,12 @@ reply
 
   * Cf. Koji+Bodhi for Fedora, Open Build Service for openSUSE, and the OpenQA instances for both distributions.
 
-* I've examined the same issue between reproducible builds vs semantic versioning while relating it to Nix. This post also shows how to use Git submodules to achieve something similar. https://matrix.ai/2016/04/04/content-addressed-dependencies-...
-reply
+* I've examined the same issue between reproducible builds vs semantic versioning while relating it to Nix. This post also shows how to use Git submodules to achieve something similar. [Reproducible Builds vs Semantic Versioning
+](https://matrix.ai/blog/content-addressed-dependencies-vs-semantic-versioning/)
 
-* The Dhall language has an interesting take on dependencies where each module can be a content addressed code supplied via ipfs https://github.com/dhall-lang/dhall-lang
+* The Dhall language has an interesting take on dependencies where each module can be a content addressed code supplied via ipfs [Dhall](https://github.com/dhall-lang/dhall-lang)
 
-* I once wrote a fairly extensive post on REST API versioning techniques with similar points (lost my backup so wayback machine): http://web.archive.org/web/20160407080723/http://stucharlton...
+* I once wrote a fairly extensive post on REST API versioning techniques with similar points (lost my backup so wayback machine): [Versioning RESTful Web Resources - A Survey](http://web.archive.org/web/20160407080723/http://stucharlton.com/blog/archives/2010/03/versioning-restful-web-resources---a-survey.html)
 
   * In short, we really seem to have forgotten the power of backward and forward compatibility because we assume a very short lifespan for our services (months, not decades).
 
@@ -875,7 +871,7 @@ reply
 
   * The SHA is what code built it-- not a git commit hash SHA, but a hash tree of the actual source.
 
-* Semantic versioning is definitely more of an art than a science. I wrote an article about it a while ago https://hackernoon.com/its-not-a-bug-it-s-a-feature-the-prob...
+* Semantic versioning is definitely more of an art than a science. I wrote an article about it a while ago [“It’s not a bug, it’s a feature” — The problem with SemVer](https://hackernoon.com/its-not-a-bug-it-s-a-feature-the-problem-with-semver-cb067de7843c).
 
 * I'm not totally sold on the heavy BDSM type systems, but one of their clear advantages comes from trivially handling this problem. Elm's package manager simply won't let you publish an incompatible update without bumping the version, all handled by type check.
 
@@ -891,7 +887,7 @@ reply
 
 * The Rust ecosystem might be a demonstration of the inverse problem. 
 
-  * Pinning versions is trivial in Rust because its default. You will never be pushed over a major version boundary without intentionally doing it (and "always get the latest" is just the "" version).
+  * Pinning versions is trivial in Rust because it's default. You will never be pushed over a major version boundary without intentionally doing it (and "always get the latest" is just the "" version).
 
   * The problem then becomes that crates never reach 1.0. Flask is probably the oldest piece of software I use that similarly never reached 1.0 - albeit its been pretty close ever since the project was reorganized last year - but the entire Rust ecosystem is buried in Flasks. Software that is 99% of the way to what the creator wants 1.0 to be, but the last 1% is something nobody wants to do. When you are 99% of the way there, the software works in 99% of use cases, and that last 1% is... the last 1% anyone wanted to do. Which means they didn't want to do it.
 
@@ -941,7 +937,7 @@ reply
 
   * Some dependencies need a complete build environment, others may require specific versions that quickly lead to fragility, dependency hell and thousands of wasted hours.
 
-  * These kind of package managers only make sense and see maximum use in SAAS type apps or dev centric environments explaining perhaps why some devs do not realise the issue. 
+  * These kind of package managers only make sense and see maximum use in SaaS type apps or dev centric environments explaining perhaps why some devs do not realise the issue. 
 
 * What we need is good, language independent, tooling to automatically select which versions to use, how risky the update is going to be, what problems are being fixed.
 
@@ -955,7 +951,7 @@ reply
 
   * The NixOS community is building towards this with hydra, ipfs, nixpkgs.
 
-* It's true that using version ranges is incredibly dangerous. My take on it: https://www.lucidchart.com/techblog/2017/03/15/package-manag...
+* It's true that using version ranges is incredibly dangerous. My take on it: [Package Management: Stop Using Version Ranges](https://www.lucidchart.com/techblog/2017/03/15/package-management-stop-using-version-ranges/)
 
 
 
