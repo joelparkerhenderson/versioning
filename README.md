@@ -59,11 +59,11 @@ If you're new to versioning, or just want to know what to do first, we recommend
 
 1. Use semantic versioning.
 
-2. Use deterministic builds, including pinning, resolutions, lockfiles,  and vendoring.
+2. Use deterministic builds, including pinning, resolutions, lockfiles, and vendoring.
 
 3. Add the dependency resolution files, e.g. the lockfiles, to your version control.
 
-4. Use automatic testing to verify your dependencies and their ugrades.
+4. Use automatic testing to verify your dependencies and their upgrades.
 
 
 ### What is a version identifier?
@@ -106,7 +106,7 @@ A bug is any deviation in actual behaviour from what the documentation says.
 
 A bug fix is a program change that brings the actual behavior into line with the expected behavior. 
 
-  * If a prgram isn't documented, and the bug isn't about some kind of externally documented area, then a bug fix might be considered a breaking change by some people.
+  * If a program isn't documented, and the bug isn't about some kind of externally documented area, then a bug fix might be considered a breaking change by some people.
 
 
 ### Non-breaking change
@@ -124,7 +124,7 @@ A breaking change:
 
   * If the behavior is different from what the documentation previously said it was, then it's a breaking change.
 
-  * If people are relying on undocumented behavior, they will have problems upgrading their libraries. They should be expecting it, if they are not, it's their problem not the library maintainer's. Wether to depend on undocumented behavior is a decision made by the library users at their discretion by weighting their opotions, it shouldn't impact upstream.
+  * If people are relying on undocumented behavior, they will have problems upgrading their libraries. They should be expecting it, if they are not, it's their problem not the library maintainer's. Whether to depend on undocumented behavior is a decision made by the library users at their discretion by weighing their options, it shouldn't impact upstream.
 
 
 ## Types of versioning
@@ -175,7 +175,7 @@ Cons:
 
   * Does not indicate a purpose of a version upgrade, such as a fix, or new feature, or breaking change.
 
-  * Even a custom enumeration that holds values such as “alpha”, “beta”, "pre", “rc”, isnt just a string, but an enumerated type, meant to convey meaning. The fact that they are serialised into a format that happens to be readable and parsable, is besides the point. 
+  * Even a custom enumeration that holds values such as “alpha”, “beta”, "pre", “rc”, isn't just a string, but an enumerated type, meant to convey meaning. The fact that they are serialised into a format that happens to be readable and parsable, is besides the point. 
 
 
 ### Keyword versioning
@@ -230,7 +230,7 @@ Hash versioning is a general idea to hash the codebase, and use the output as th
 
   * For example you could use a git commit hash.
 
-  * This can be represented as a unique hexdecimal lowercase string of 40-characters.
+  * This can be represented as a unique hexadecimal lowercase string of 40-characters.
 
   * Such as " a7ac99da44892ef15fe15d7ad2d22d292d9d2a85".
 
@@ -253,7 +253,7 @@ UUID versioning is a general idea to create a universally unique identifier (UUI
 
   * For example you could generate a secure random UUID-4.
 
-  * This can be representated as a unique hexadecimal uppercase string of 36 characters.
+  * This can be represented as a unique hexadecimal uppercase string of 36 characters.
 
   * Such as "90161E28-AEB7-5DD1-FCCB-0FDA3FEDAE99"
 
@@ -378,7 +378,7 @@ Why "semantic versioning" doesn't really work:
 TODO
 
 
-### A package manager that followed such a proposal would foster an eco-system with greater care for introducing incompatibility
+### A package manager that followed such a proposal would foster an ecosystem with greater care for introducing incompatibility
 
 TODO
 
@@ -448,7 +448,7 @@ A. Yes this could help.
 
 * There are tools like greenkeeper which use your project's unit test to try out packages before upgrading, adding extra level of assurance.
 
-  * Some communities have also started doing the reverse, where as a library you can get all your users's tests to run to check that you have not broken something they were using.
+  * Some communities have also started doing the reverse, where as a library you can get all your user's tests to run to check that you have not broken something they were using.
 
   * I know that that happens for the Rust compiler, possibly some libraries as well. I don't know that it's systematic but I do know that they regularly leverage Cargo to find out major dependencies/users and run those against pending changes.
 
@@ -480,7 +480,7 @@ A. Yes this could help.
 
   * 4. My own projects have unit tests, and of course, Rust does extensive compile-time checks. So I'm likely to catch any breakage anyway.
 
-  * So the absolute worse-case scenario here is that somebody messes up (which is very rare). At this point, I can just file a bug upstream, lock a specific version down in "Cargo.toml", and wait for things to get sorted out.
+  * So the absolute worst-case scenario here is that somebody messes up (which is very rare). At this point, I can just file a bug upstream, lock a specific version down in "Cargo.toml", and wait for things to get sorted out.
 
   * I have zero need to "be certain". I'm quite happy with "It works nicely 99.9% of time, and it has an easy manual fallback when the inevitable problems occur."
 
@@ -570,7 +570,7 @@ Cons:
 
 ### Vendoring
 
-* Pinning, while more reliable, is not actually fully reliable. If you want reliable you should be checking in copies of your dependencies either directly or as sub modules, i.e. vendoring. Then if you want to upgrade you check in the latest. Pinning still allows the person in control of the 3rdparty repo to mess you up. Your reproducibility is still at their mercy.
+* Pinning, while more reliable, is not actually fully reliable. If you want reliable you should be checking in copies of your dependencies either directly or as sub modules, i.e. vendoring. Then if you want to upgrade you check in the latest. Pinning still allows the person in control of the 3rd party repo to mess you up. Your reproducibility is still at their mercy.
 
 * Pinning isn't enough. People push history changes, rename things and just delete stuff all the time. I've had this happen to be more than once and would now never consider a application production ready until all dependencies are either vendored or forked.
 
@@ -659,7 +659,7 @@ Sometimes, this can get very gnarly. In more complicated scenarios (e.g. involvi
 * One approach is to convert names-and-version-numbers into identifiers used in package management systems. The convention is basically what Debian has always done for C libraries (putting the soname in the package name), so it's certainly a plausible way to manage things.
 
 * If I stop using Debian some day, it will probably be because of that habit of pushing version information into part of a package's name.
-It completely breaks upgrades. Newer versions aren't compatible with older versions, yet there's nothing telling apt that it should upgrade other stuff depending on the older version first. Also, who is to say wether foo5.3 is newer or older than foo5, and since foo5 depends on bar3.2, while foo5.3 depends on bar3.2a, what package do you have to upgrade first?
+It completely breaks upgrades. Newer versions aren't compatible with older versions, yet there's nothing telling apt that it should upgrade other stuff depending on the older version first. Also, who is to say whether foo5.3 is newer or older than foo5, and since foo5 depends on bar3.2, while foo5.3 depends on bar3.2a, what package do you have to upgrade first?
 
 * libbar3 still has a package version of 3.2.1, libfoo5 still has a package version of 5.3.0. Debian putting soname’s into package names is actually quite handy as it allows side-by-side installation of multiple versions of a library with ease.
 
@@ -879,7 +879,7 @@ reply
 
 * I'm not totally sold on the heavy BDSM type systems, but one of their clear advantages comes from trivially handling this problem. Elm's package manager simply won't let you publish an incompatible update without bumping the version, all handled by type check.
 
-* People using semantic versioning when its totally unnecessary is a peeve of mine. Maybe if youre releasing an api or something it makes sense (I dunno, I dont do that) I make games and just number my releases / versions 1,2,3,4,5,6 etc.
+* People using semantic versioning when its totally unnecessary is a peeve of mine. Maybe if you're releasing an api or something it makes sense (I dunno, I don't do that) I make games and just number my releases / versions 1,2,3,4,5,6 etc.
 
   * You can also do this with semantic versioning; I have indeed seen people who, when forced to use semver, just do 1.0.0, 2.0.0, 3.0.0, 4.0.0... It's completely valid, because you, as the package author, are given ultimate freedom by semver in determining when major version bumps are appropriate.
 	
@@ -899,13 +899,13 @@ reply
 
   * Probably the greatest problem with semantic versioning in that context becomes feature creep. It is scary to go to 1.0 - you feel free in 0.x land where you can make major breaking changes in a .x release whereas you need to increment that scary major version number to do it later on. And besides the fear there is a lot of logistical headache properly maintaining semantically versioned software - you should expect if you never release a 2.0 to have someone trying to contribute 1.x bugfixes down the road, with the need to release 1.x.y bugfixes for all time. Because 2.0 is, like the article says, a new library - its a different API, you changed the meaning. So you are now maintaining two libraries.
 
-  * There is also one final fear with the way Rust setup its crates ecosystem - if you are bold and break things but don't end up delaying 1.0 for way too long, you might end up incrementing the major version a bit. And there is a cultural and subconscious aversion to anything on crates.io you see at version 3.0 or heavens forbid 4.0 or more. That software is unreliable, the developer is changing it all the time!. But then you go and use a 0.15 crate that is having the same problem anyway, just without saying "this probably does its job" like a 1.0 can.
+  * There is also one final fear with the way Rust sets up its crates ecosystem - if you are bold and break things but don't end up delaying 1.0 for way too long, you might end up incrementing the major version a bit. And there is a cultural and subconscious aversion to anything on crates.io you see at version 3.0 or heavens forbid 4.0 or more. That software is unreliable, the developer is changing it all the time!. But then you go and use a 0.15 crate that is having the same problem anyway, just without saying "this probably does its job" like a 1.0 can.
 
-  * In the end, versioning truly is almost meaningless, even in an enforced semantic versioning system the intent breaks down and meaning is lost just because different people release software differently. But that is a real deep almost - because its still more information than not having it, and in Rust right now at least it gives more helpful information than not. I'd call it a success at that point - way more than say Linux, where the major version is incremented whenever Linus wants to run a Google+ poll...
+  * In the end, versioning truly is almost meaningless, even in an enforced semantic versioning system the intent breaks down and meaning is lost just because different people release software differently. But that is a real deep almost - because it's still more information than not having it, and in Rust right now at least it gives more helpful information than not. I'd call it a success at that point - way more than say Linux, where the major version is incremented whenever Linus wants to run a Google+ poll...
 
 * As far as I understand, the situation with 0.x.y libs on crates.io is working-as-intended; a major version of 0 denotes libraries that the author does not yet want to commit to having a stable interface (and may not ever want to commit to such), which is crucial information for any potential users of that library. 
 
-  * The fact that there are many such libraries can be attributed to the fact that having a stable inferface was impossible before Rust stabilized in May 2015, and so most libraries are exceedingly young (even disregarding those packages which see one aspirational release and are then forgotten, which make up the bulk of every package repository for every language regardless of versioning scheme :P ).
+  * The fact that there are many such libraries can be attributed to the fact that having a stable interface was impossible before Rust stabilized in May 2015, and so most libraries are exceedingly young (even disregarding those packages which see one aspirational release and are then forgotten, which make up the bulk of every package repository for every language regardless of versioning scheme :P ).
 
   * If the situation were to never improve that would indeed be concerning, but the Rust devs acknowledge the concern have been striving towards 1.0 for all of their "blessed" libs (e.g. regex, which you mention, is having its 1.0 release imminently) in order to help encourage people who might be on the edge to take the plunge.
 
