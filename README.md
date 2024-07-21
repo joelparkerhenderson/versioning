@@ -100,7 +100,7 @@ Examples:
 
 ### Bug fix change
 
-A bug is any deviation in actual behaviour from what the documentation says.
+A bug is any deviation in actual behavior from what the documentation says.
 
   * If a program isn't documented, then its code implicitly fills the role of documentation. 
 
